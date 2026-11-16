@@ -1,0 +1,8 @@
+{
+  "notes": { "type": "files", "path": "/state/notes" },
+  "my-hindsight": {
+    "type": "hindsight",
+    "url": "http://hindsight:8888",
+    "api_key": "replace-with-your-private-instance-key"
+  }
+}

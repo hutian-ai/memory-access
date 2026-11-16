@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hutian-memory-access"
+version = "0.2.0"
+description = "Versioned, authorized memory access across independent backends through REST, MCP and CLI"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+  "fastapi==0.136.3",
+  "httpx==0.28.1",
+  "mcp==1.30.0",
+  "pydantic==2.12.5",
+  "uvicorn>=0.30,<1",
+]
+
+[project.optional-dependencies]
+mem0 = ["mem0ai==1.0.11"]
+
+[project.scripts]
+memory-access-admin = "hutian_memory_access.admin:main"
+memory-access = "hutian_memory_access.client:main"
+
+[tool.setuptools.packages.find]
+include = ["hutian_memory_access*"]
