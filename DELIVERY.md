@@ -1,6 +1,6 @@
 # Memory Access 0.2.0 delivery
 
-2026-11-15. Local source delivery; no remote repository, public release, package publication or announcement. The former Scoped Memory Access Hindsight entry point is retained as `/v1`; the backend-neutral protocol is implemented at `/v2` and through MCP and CLI.
+2026-11-15 initial local delivery. The source repository is now maintained at https://github.com/hutian-ai/memory-gateway; npm/PyPI packages and an announcement have not been published. The former Scoped Memory Access Hindsight entry point is retained as `/v1`; the backend-neutral protocol is implemented at `/v2` and through MCP and CLI.
 
 ## What is independently usable
 
@@ -40,3 +40,11 @@ Providers can be hosted or self-managed; only the actual configured deployments 
 ## Share draft — unpublished
 
 “I wanted applications to choose a memory engine without rewriting authorization and provenance every time. Memory Access now offers one resource-scoped REST/MCP/CLI contract with adapters for Hindsight, Mem0 OSS and simple managed notes. The contract preserves their different write modes, source ownership, deletion scope and operation states. The first local checks use real engines; cloud and migration capabilities remain explicitly separate.”
+
+## 2026-11-17 — module-owned client and host integration
+
+The module now includes `sdk/` (`@hutian-ai/memory-gateway-client`) and an optional, separately authorized HTTP management endpoint. The SDK owns versioned paths, response validation and explicit legacy v1 compatibility. Its search schema accepts absent/null provider metadata found in existing Hindsight results; the legacy v1 client also preserves nullable document IDs and source-fact references. Real v1 list/source/recall reads were checked. Hutian's server plugin uses this client; backend dialects stay here. A restricted host issuer selects the connection, resource pattern, namespace and grants; ordinary resource credentials cannot administer resources.
+
+Actual local checks: existing credentials and source reads preserved; independent SDK write accepted and the original operation later completed; real retrieval found its source. REST/MCP reads, cross-resource rejection, read-only write rejection, revocation and repeat provisioning were checked. Hutian's memory page saved and retrieved a distinct acceptance record, and its real Mac member chat called `search_context` and `read_memory` successfully. Acceptance content is explicitly temporary, not a user preference. The ongoing Hindsight extraction/storage remains in the original backend; no resource rebinding or data reset was performed.
+
+This source increment is included in the user-authorized repository delivery. SDK packages remain local dependencies; no npm/PyPI release is included. Current integration procedure and evidence are recorded in the adjacent `hutian-world/docs/resource-gateways-2026-11-17.md`. Existing provider limits above still apply, including the unverified Mem0 Platform integration and lack of an exactly-once guarantee for external effects.

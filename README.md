@@ -131,3 +131,12 @@ No automatic public release, full business authorization service or test framewo
 ## Delivery status
 
 Version 0.2.0 is a local source delivery, not a public package or hosted service. See [DELIVERY.md](DELIVERY.md) for actual backend checks and a share draft. Hindsight 1.2.0 and Mem0 OSS SDK 1.0.11 were used for these checks; a provider version change requires rechecking its dialect. Existing data is not automatically migrated when another connection is added.
+
+
+## TypeScript client and host integration
+
+The independently usable client is in `sdk/` (`@hutian-ai/memory-gateway-client`). Run `pnpm install && pnpm build` there. It owns versioned request paths, response validation and legacy v1 compatibility. A host plugin supplies an authorized resource ID and scoped client configuration; it does not implement provider-specific calls.
+
+For trusted host provisioning, operators may set `MEMORY_ADMIN_CONFIG` to a private issuer configuration. `PUT /admin/v1/resources/{resource_id}` accepts a separate host bearer credential. The operator fixes its resource pattern, backend connection, namespace prefix and read/write grants. Callers cannot select upstream credentials, paths or providers. Provisioning is idempotent, refuses rebinding and never re-enables revoked credentials. Ordinary memory tokens cannot use this endpoint; it is disabled when the configuration is absent.
+
+Example issuer structure is in `examples/host-provisioning.example.json`. Use separate random secrets for the host token and deterministic credential derivation. Store only the SHA-256 host token hash on the server. Configure a writable policy directory when enabling administration, and retain the same directory across restarts. Never expose the host credential to a browser or Agent.

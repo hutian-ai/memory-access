@@ -312,3 +312,7 @@ async def get_operation(resource_id: str, operation_id: UUID) -> dict:
 from .protocol import mount_protocol
 mount_protocol(app, mcp, store, token, mcp_token)
 app.mount("/mcp", mcp.streamable_http_app())
+
+# Separate, opt-in host administration; ordinary resource tokens do not authorize it.
+from .management import mount_management
+mount_management(app, store)

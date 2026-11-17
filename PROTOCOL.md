@@ -53,3 +53,8 @@ Search returns resource-qualified items and source IDs. IDs and scores remain me
 - Keep secrets and provider exception bodies out of public results. Avoid writing caller content into generic diagnostics.
 
 OpenAPI at `/docs` and the MCP tool schemas provide executable request definitions. No new network transport, account system or model reasoning engine is required.
+
+
+## Host provisioning extension
+
+Optional `PUT /admin/v1/resources/{resource_id}` uses a separately configured host token, not a resource credential. The server fixes allowed resource IDs and their connection/namespace mapping. It returns a scoped client configuration after atomically persisting the grant. Repeated identical requests yield the same credential; revocation or changed bindings require explicit operator handling. No provider URL, model setting, filesystem path or permission expansion is accepted from the caller. This endpoint is separate from the ordinary memory protocol and is not exposed as an Agent MCP tool.

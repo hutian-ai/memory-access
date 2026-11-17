@@ -1,4 +1,4 @@
-"""Local operator commands. No HTTP administration surface and no plaintext server token store."""
+"""Local operator commands. Optional HTTP host provisioning is a separate capability."""
 from __future__ import annotations
 
 import argparse
